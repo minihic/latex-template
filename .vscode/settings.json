@@ -1,0 +1,87 @@
+{    "[latex]": {
+        "editor.defaultFormatter": "James-Yu.latex-workshop",
+        "editor.wordWrap": "on",
+        "editor.suggestSelection": "recentlyUsedByPrefix"
+    },
+    "latex-workshop.view.outline.floats.enabled": false,
+    "latex-workshop.view.outline.sync.viewer": true,
+    "latex-workshop.view.outline.commands":[],
+    "latex-workshop.formatting.latex": "latexindent",
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.view.pdf.internal.synctex.keybinding":"double-click",
+    "latex-workshop.latex.watch.pdf.delay": 60,
+    "latex-workshop.latex.outDir": "./out/",
+    // "latex-workshop.latex.autoClean.run":"onBuilt",
+    "latex-workshop.latex.clean.fileTypes": [
+        "%DOCFILE%.aux",
+        "%DOCFILE%.bbl",
+        "%DOCFILE%.blg",
+        "%DOCFILE%.idx",
+        "%DOCFILE%.ind",
+        "%DOCFILE%.lof",
+        "%DOCFILE%.lot",
+        "%DOCFILE%.out",
+        "%DOCFILE%.toc",
+        "%DOCFILE%.acn",
+        "%DOCFILE%.acr",
+        "%DOCFILE%.alg",
+        "%DOCFILE%.glg",
+        "%DOCFILE%.glo",
+        "%DOCFILE%.gls",
+        "%DOCFILE%.fls",
+        "%DOCFILE%.log",
+        "%DOCFILE%.fdb_latexmk",
+        "%DOCFILE%.snm",
+        "%DOCFILE%.synctex(busy)",
+        "%DOCFILE%.synctex.gz(busy)",
+        "%DOCFILE%.nav",
+        "%DOCFILE%.vrb"
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": [
+                "latexmk",
+                "biber",
+                "latexmk"
+            ]
+        },
+        {
+      "name": "pdflatex -> biber -> pdflatex*2",
+      "tools": ["pdflatex", "biber", "pdflatex", "pdflatex"]
+    }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-aux-directory=out",
+                "-output-directory=out",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-aux-directory=out",
+                "-output-directory=out",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": ["--output-directory=%OUTDIR%", "%DOCFILE%"],
+            "env": {}
+    },
+    ],
+}

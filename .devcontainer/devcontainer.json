@@ -1,0 +1,17 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:latest",
+  "features": {"ghcr.io/prulloac/devcontainer-features/latex:1": {}
+},
+  "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "james-yu.latex-workshop",
+        "JeffersonQin.latex-snippets-jeff",
+        "bierner.markdown-preview-github-styles",
+        "streetsidesoftware.code-spell-checker",
+        "bierner.markdown-mermaid"
+      ]
+      }
+    }
+}

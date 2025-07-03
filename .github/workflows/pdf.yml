@@ -1,0 +1,51 @@
+name: Generate PDF
+
+on:
+    push:
+        paths:
+            - 'main.tex'
+            - '.github/workflows/pdf.yml'
+    workflow_dispatch:
+
+jobs:
+    build-pdf:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Run Tex Compile
+              uses: xu-cheng/latex-action@v3
+              with:
+                root_file: main.tex
+
+            - name: Rename PDF
+              run: mv main.pdf report.pdf
+
+            - name: Check if this is a tag
+              id: check_tag
+              run: |
+                if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+                  echo "is_tag=true" >> $GITHUB_OUTPUT
+                else
+                  echo "is_tag=false" >> $GITHUB_OUTPUT
+                fi
+
+            - name: Rename PDF with tag version
+              if: steps.check_tag.outputs.is_tag == 'true'
+              run: |
+                TAG_NAME="${GITHUB_REF##*/}"
+                mv report.pdf "report-${TAG_NAME}.pdf"
+
+            - name: Upload to GitHub Release
+              if: steps.check_tag.outputs.is_tag == 'true'
+              uses: softprops/action-gh-release@v2
+              with:
+                  files: report-${{ github.ref_name }}.pdf
+
+            - name: Upload as Artifact
+              if: steps.check_tag.outputs.is_tag != 'true'
+              uses: actions/upload-artifact@v4
+              with:
+                name: report
+                path: report.pdf
