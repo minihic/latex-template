@@ -3,8 +3,8 @@ name: Generate PDF
 on:
     push:
         paths:
-            - 'main.tex'
-            - '.github/workflows/pdf.yml'
+            # - 'main.tex'
+            # - '.github/workflows/pdf.yml'
     workflow_dispatch:
 
 jobs:
